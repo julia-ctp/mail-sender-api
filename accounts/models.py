@@ -8,7 +8,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, blank=False, null=False)
     updated_at = models.DateTimeField(auto_now=True)
 
-    REQUIRED_FIELDS = ["email"]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return self.email
