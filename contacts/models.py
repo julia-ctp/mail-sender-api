@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import uuid
+from .managers import ContactManager
 
 
 class Contact(models.Model):
@@ -13,6 +14,8 @@ class Contact(models.Model):
     is_active = models.BooleanField(default=True) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = ContactManager()
 
     class Meta:
         unique_together = ("user", "email")

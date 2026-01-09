@@ -1,3 +1,7 @@
-from django.urls import path
+from .views import ContactViewSet
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = []
+router = DefaultRouter()
+router.register(r"", ContactViewSet, basename="contacts")
+
+urlpatterns = router.urls
