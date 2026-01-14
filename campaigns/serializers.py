@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Campaign, CampaignContact
+from .enums import CampaignStatus
 
 class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,7 +25,10 @@ class CampaignSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs): 
         if self.instance: 
-            if self.instance.status in ["sent", "sending"]:
+            if self.instance.status in [
+                CampaignStatus.SENT, 
+                CampaignStatus.SENDING
+            ]:
                 raise serializers.ValidationError(
                     "This campaign cannot be edited."
                 )
@@ -40,9 +44,8 @@ class CampaignContactSerializer(serializers.ModelSerializer):
         model = CampaignContact
         fields = (
             "id", 
-            "contact",
             "contact_name",
-            "contact_email"
+            "contact_email",
             "status", 
             "error_message",
             "created_at"
