@@ -19,6 +19,7 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ("user", "email")
+        ordering = ["-created_at"] 
 
     def __str__(self):
         return self.email
