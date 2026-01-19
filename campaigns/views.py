@@ -8,11 +8,13 @@ from contacts.models import Contact
 from .serializers import CampaignSerializer
 from .enums import CampaignStatus, CampaignContactStatus
 from .tasks import send_campaign_task
+from core.pagination import CustomCursorPagination
 
 
 class CampaignViewset(ModelViewSet):
     serializer_class = CampaignSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = CustomCursorPagination
 
     def get_queryset(self):
         return Campaign.objects.filter(user=self.request.user)
